@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 description = 'UberProject-EntityService'
 
 java {
@@ -21,22 +21,6 @@ configurations {
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            url = uri('E:/UberSpringProject/UberProject')
-        }
-    }
-}
-
-
-
 repositories {
     mavenCentral()
 }
@@ -49,11 +33,87 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.flywaydb:flyway-mysql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+    implementation 'org.flywaydb:flyway-core'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+    archiveClassifier = ''
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId = 'com.example'
+            artifactId = 'UberProject-EntityService'
+            version = '0.0.2-SNAPSHOT'
+
+            pom {
+                name = 'UberProject Entity Service'
+                description = 'Shared entity models for UberProject microservices'
+
+                developers {
+                    developer {
+                        id = 'shashank'
+                        name = 'Shashank'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+    suppressedValidationErrors.add('dependencies-without-versions')
+}
+
+tasks.register('printPublicationInfo') {
+    doLast {
+        println "=========================================="
+        println "Publication Information"
+        println "=========================================="
+        println "Group ID    : ${project.group}"
+        println "Artifact ID : uberproject-entity-service"
+        println "Version     : ${project.version}"
+        println "=========================================="
+        println ""
+        println "To publish, run:"
+        println "  gradlew publishToMavenLocal"
+        println ""
+        println "Published location (Windows):"
+        println "  C:\\Users\\<username>\\.m2\\repository\\com\\example\\uberproject-entity-service\\${project.version}\\"
+        println ""
+        println "To use in other projects:"
+        println ""
+        println "  repositories {"
+        println "      mavenLocal()"
+        println "      mavenCentral()"
+        println "  }"
+        println ""
+        println "  dependencies {"
+        println "      implementation 'com.example:uberproject-entity-service:${project.version}'"
+        println "  }"
+        println "=========================================="
+    }
 }
