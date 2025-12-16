@@ -33,6 +33,8 @@ public class Driver extends BaseModel {
 
     private String aadhaarNumber;
 
+    private String country;
+
     @OneToMany(mappedBy = "driver")
     @Fetch(FetchMode.SUBSELECT)
     private List<Booking> bookings;
