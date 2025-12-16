@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.0'
+    id 'org.springframework.boot' version '3.4.0'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'maven-publish'
 }
 
 group = 'com.example'
-version = '0.0.2-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 description = 'UberProject-EntityService'
 
 java {
@@ -29,6 +29,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-mysql'
     compileOnly 'org.projectlombok:lombok'
@@ -37,7 +38,7 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.5'
 }
 
 bootJar {
@@ -56,7 +57,7 @@ publishing {
 
             groupId = 'com.example'
             artifactId = 'UberProject-EntityService'
-            version = '0.0.2-SNAPSHOT'
+            version = '0.0.3-SNAPSHOT'
 
             pom {
                 name = 'UberProject Entity Service'
@@ -84,7 +85,6 @@ java {
 
 tasks.named('test') {
     useJUnitPlatform()
-    enabled = false
 }
 
 tasks.withType(GenerateModuleMetadata).configureEach {

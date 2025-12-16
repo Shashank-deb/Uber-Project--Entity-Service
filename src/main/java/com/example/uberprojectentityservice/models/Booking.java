@@ -2,15 +2,13 @@ package com.example.uberprojectentityservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "booking")
 @Getter
 @Setter
 @SuperBuilder
@@ -19,21 +17,32 @@ import java.util.Date;
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","driver","passenger"})
 public class Booking extends BaseModel {
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookingStatus bookingStatus;
 
-     @Enumerated(value = EnumType.STRING)
-     private BookingStatus bookingStatus;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_time", nullable = false)
+    private Date startTime;
 
-     @Temporal(value = TemporalType.TIMESTAMP)
-     private Date startTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_time")
+    private Date endTime;
 
-     @Temporal(value = TemporalType.TIMESTAMP)
-     private Date endTime;
+    @Column(name = "start_point")
+    private String startPoint;
 
-     private Long totalDistance;
+    @Column(name = "end_point")
+    private String endPoint;
 
-     @ManyToOne(fetch = FetchType.LAZY)
-     private Driver driver;
+    @Column(name = "total_distance")
+    private Long totalDistance;
 
-     @ManyToOne(fetch = FetchType.LAZY)
-     private Passenger passenger;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "passenger_id", nullable = false)
+    private Passenger passenger;
 }
