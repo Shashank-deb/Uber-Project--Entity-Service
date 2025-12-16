@@ -23,17 +23,19 @@ configurations {
 
 publishing {
     publications {
-        mavenJava(MavenPublication){
+        mavenJava(MavenPublication) {
             from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri('E:/UberSpringProject/UberProject')
         }
     }
 }
 
-repositories {
-    maven {
-        url=uri('E:/UberSpringProject/UberProject-EntityService')
-    }
-}
+
 
 repositories {
     mavenCentral()
