@@ -2,6 +2,8 @@ package com.example.uberprojectentityservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Fetch;
@@ -34,6 +36,27 @@ public class Driver extends BaseModel {
 
     @Column(length = 50)
     private String country;
+
+    @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
+    private Car car;
+
+    @Enumerated(value = EnumType.STRING)
+    private DriverApprovalStatus driverApprovalStatus;
+
+    @OneToOne
+    private ExactLocation lastKnowLocation;
+
+    @OneToOne
+    private ExactLocation home;
+
+
+    private String activeCity;
+
+    @DecimalMin(value = "0.00", message = "Rating must be grater than or equal to 0.00")
+    @DecimalMax(value = "5.00", message = "Rating must be less than or equal to 5.00")
+    private double rating;
+
+
 
     @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
