@@ -52,6 +52,9 @@ public class Driver extends BaseModel {
 
     private String activeCity;
 
+    @Column(name = "pan_number",unique = true)
+    private String panNumber;
+
     @DecimalMin(value = "0.00", message = "Rating must be grater than or equal to 0.00")
     @DecimalMax(value = "5.00", message = "Rating must be less than or equal to 5.00")
     private double rating;
