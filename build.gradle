@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.4-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 description = 'UberProject-EntityService'
 
 java {
@@ -56,7 +56,7 @@ publishing {
 
             groupId = 'com.example'
             artifactId = 'UberProject-EntityService'
-            version = '0.0.4-SNAPSHOT'
+            version = '0.0.3-SNAPSHOT'
 
             pom {
                 name = 'UberProject Entity Service'
