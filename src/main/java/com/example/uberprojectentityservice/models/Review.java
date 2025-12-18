@@ -21,7 +21,8 @@ public class Review extends BaseModel  {
 
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
-    private Booking booking; // we have defined a 1:1 relationship between booking and review
+    private Booking booking;
+
 
     @Override
     public String toString() {

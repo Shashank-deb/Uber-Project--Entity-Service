@@ -15,6 +15,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","driver","passenger"})
+//@Table(name = "booking",indexes = {
+//        @Index(columnList = "driver_id")
+//})
 public class Booking extends BaseModel {
 
     @Enumerated(EnumType.STRING)
@@ -45,4 +48,10 @@ public class Booking extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "passenger_id", nullable = false)
     private Passenger passenger;
+
+    @OneToOne
+    private ExactLocation startLocation;
+
+    @OneToOne
+    private ExactLocation endLocation;
 }

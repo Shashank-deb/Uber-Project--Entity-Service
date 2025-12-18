@@ -2,6 +2,8 @@ package com.example.uberprojectentityservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -34,7 +36,20 @@ public class Passenger extends BaseModel {
     @Builder.Default
     private List<Booking> bookings = new ArrayList<>();
 
-    // Helper methods for bidirectional relationship
+    @OneToOne
+    private Booking activeBooking;
+
+    @DecimalMin(value = "0.00", message = "Rating must be grater than or equal to 0.00")
+    @DecimalMax(value = "5.00", message = "Rating must be less than or equal to 5.00")
+    private Double rating;
+
+    @OneToOne
+    private ExactLocation lastKnowLocation;
+
+    @OneToOne
+    private ExactLocation home;
+
+
     public void addBooking(Booking booking) {
         bookings.add(booking);
         booking.setPassenger(this);
