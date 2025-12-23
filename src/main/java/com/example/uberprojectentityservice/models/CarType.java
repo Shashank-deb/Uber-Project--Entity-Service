@@ -4,5 +4,6 @@ public enum CarType {
     XL,
     SEDAN,
     HATCHBACK,
-    COMPACT_SUV
+    COMPACT_SUV,
+    SUV
 }

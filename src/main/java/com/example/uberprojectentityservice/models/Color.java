@@ -2,19 +2,15 @@ package com.example.uberprojectentityservice.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Color extends BaseModel{
-    @Column(unique=true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 }

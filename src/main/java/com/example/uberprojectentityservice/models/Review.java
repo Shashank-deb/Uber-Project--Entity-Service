@@ -30,3 +30,4 @@ public class Review extends BaseModel  {
 
 }
 
+// new Review(content, rating);

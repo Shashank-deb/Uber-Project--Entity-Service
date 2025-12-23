@@ -2,20 +2,15 @@ package com.example.uberprojectentityservice.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-
+import lombok.*;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
-public class NamedLocation extends BaseModel{
+public class NamedLocation extends BaseModel {
 
     @OneToOne
     private ExactLocation exactLocation;
@@ -29,4 +24,5 @@ public class NamedLocation extends BaseModel{
     private String country;
 
     private String state;
+
 }
